@@ -61,7 +61,7 @@ class ExperimentConfiguration(object):
         self.ceph_debug = False
         self.rados_used = True # If set to False, we deploy data to a non-cephFS directory and we tell Arrow-Spark to not use RADOS-based reads, but regular reads instead.
         # bluestore cluster options
-        self.ceph_bluestore_path_override = '/dev/nvme0n1p4' # Must point to a device (e.g. '/dev/nvme0n1p4') or `None`, in which case we don't override the "device_path" extra info of each OSD.
+        self.ceph_bluestore_path_override = '/dev/nvme0n1' # Must point to a device (e.g. '/dev/nvme0n1p4') or `None`, in which case we don't override the "device_path" extra info of each OSD.
         # memstore cluster options
         self.ceph_memstore_storage_size = '10GiB' # Amount of bytes we reserve on OSDs for storing data with memstore.
 
