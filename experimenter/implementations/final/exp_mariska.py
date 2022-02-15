@@ -49,7 +49,7 @@ class CephExperiment(ExperimentInterface):
         ''''Get experiment ExecutionInterfaces.
         Returns:
             `iterable(internal.experiment.ExecutionInterfaces)`, containing all different setups we want to experiment with.'''
-        data_query = 'SELECT * FROM val0 WHERE total_amount > 27' #10% row selectivity, 100% column selectivity
+        data_query = 'SELECT * FROM table WHERE val0 > 27' #10% row selectivity, 100% column selectivity
         batchsizes = [4096]
 
         stripe = 16 # One file should have stripe size of this many MB
