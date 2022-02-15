@@ -41,7 +41,7 @@ def distribute_automatic(interface):
     designations = ceph_config.designations
     for node in reservation_nodes:
         if 'designations' in node.extra_info:
-            manual_designations = [Designation[y.strip().upper()].name for y in node.extra_info['designations'].split(',')]
+            manual_designations = [Designation[y.strip().upper()] for y in node.extra_info['designations'].split(',')]
             if manual_designations not in designations:
                 printw('designation ({}) not in experiment-designations. Removing manual designation'.format(node.extra_info['designations']))
                 del node.extra_info['designations']
