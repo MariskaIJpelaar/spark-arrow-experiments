@@ -59,7 +59,7 @@ def start_rados_ceph(interface, idx, num_experiments, ceph_nodes, rados_ceph_adm
         osd_op_threads (int or None): Number of op threads to use for each OSD. Make sure this number is not greater than the amount of cores each OSD has.
         osd_pool_size (int or None): Fragmentation of object to given number of OSDs. Must be less than or equal to amount of OSDs.
         osd_max_obj_size (int): Maximal object size in bytes. Normal=128*1024*1024 (128MB).
-        placement_groups (int or None): Amount of placement groups in Ceph. If not set, we use the recommended formula `(num osds * 100) / (pool size`, as found here: https://ceph.io/pgcalc/.
+        placement_groups (int or None): Amount of placement groups in Ceph. If not set, we use the recommended formula `(num osds * 100) / (pool size)`, as found here: https://docs.ceph.com/en/pacific/rados/operations/placement-groups/#choosing-the-number-of-placement-groups.
         use_client_cache (bool): Toggles using cephFS I/O cache.
         ceph_silent (bool): Indication whether Ceph output must be suppressed.
         silent (bool): Indication whether general output must be suppressed.
@@ -75,7 +75,7 @@ def start_rados_ceph(interface, idx, num_experiments, ceph_nodes, rados_ceph_adm
         retval, _ = memstore(reservation, key_path=config.key_path, admin_id=rados_ceph_admin_id, mountpoint_path=config.ceph_mountpoint_dir, placement_groups=config.ceph_placement_groups, storage_size=config.ceph_memstore_storage_size, osd_op_threads=config.ceph_osd_op_threads, osd_pool_size=config.ceph_osd_pool_size, osd_max_obj_size=config.ceph_osd_max_obj_size, use_client_cache=config.ceph_use_client_cache, silent=config.ceph_silent or config.silent)
     else:
         from rados_deploy.start import bluestore
-        retval, _ = bluestore(reservation, key_path=config.key_path, admin_id=rados_ceph_admin_id, mountpoint_path=config.ceph_mountpoint_dir, placement_groups=config.ceph_placement_groups, device_path=config.ceph_bluestore_path_override, osd_op_threads=config.ceph_osd_op_threads, osd_pool_size=config.ceph_osd_pool_size, osd_max_obj_size=config.ceph_osd_max_obj_size, use_client_cache=config.ceph_use_client_cache, silent=config.ceph_silent or config.silent)
+        retval, _ = bluestore(reservation, key_path=config.key_path, admin_id=rados_ceph_admin_id, mountpoint_path=config.ceph_mountpoint_dir, placement_groups=config.ceph_placement_groups, device_path=config.ceph_bluestore_path_override, osd_op_threads=config.ceph_osd_op_threads, osd_pool_size=config.ceph_osd_pool_size, osd_max_obj_size=config.ceph_osd_max_obj_size, use_client_cache=config.ceph_use_client_cache, use_ceph_volume=config.ceph_use_ceph_volume, silent=config.ceph_silent or config.silent)
     if not retval:
         printe('Could not start RADOS-Ceph (iteration {}/{})'.format(idx+1, num_experiments))
         return False

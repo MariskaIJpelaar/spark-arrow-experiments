@@ -48,6 +48,7 @@ class ExperimentConfiguration(object):
 
         # RADOS-Ceph cluster options
         self.ceph_silent = False
+        self.ceph_use_ceph_volume = False # If set, uses 'ceph-volume' command instead of 'osd create'
         self.ceph_compile_threads = 16 # Amount of cores to use when compiling Arrow. Never set higher than the number of cores. When out-of-memory occurs, recompile using less cores.
         self.ceph_osd_op_threads = 16 # Amount of cores to use to serve requests with Ceph OSDs.
         self.ceph_osd_pool_size = 3 # Amount of replicas per object to store.
