@@ -39,7 +39,7 @@ class CephExperiment(ExperimentInterface):
         super(CephExperiment, self).__init__()
 
     def get_executions(self):
-        query = 'SELECT MIN(value) FROM table'
+        query = 'SELECT value FROM table'
         bathsize = 4096
         stripe = 16
         timestamp = datetime.now().isoformat()
@@ -51,7 +51,8 @@ class CephExperiment(ExperimentInterface):
         for datafile in datafiles:
             result_dirname = str(datafile)
             configbuilder = ExperimentConfigurationBuilder()
-            configbuilder.set('runs', 1)
+            configbuilder.set('runs', 30)
+            configbuilder.set('kind', 'df_nums')
             configbuilder.set('batchsize', bathsize)
             configbuilder.set('node_config', get_node_configuration())
             configbuilder.set('stripe', stripe)
